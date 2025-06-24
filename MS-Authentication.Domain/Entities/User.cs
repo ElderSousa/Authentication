@@ -14,4 +14,5 @@ public class User : BaseModel
     [NotMapped]
     public bool ValidationRegister { get; set; }
     public ICollection<UserRole> UserRoles { get; set; } = new HashSet<UserRole>();
+    public ICollection<RefreshToken> RefreshTokens { get; set; } = new HashSet<RefreshToken>();
 }

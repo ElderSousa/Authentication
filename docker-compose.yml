@@ -4,3 +4,29 @@ services:
     build:
       context: .
       dockerfile: MS-Authentication.API/Dockerfile
+    container_name: ms-authentication-instance
+
+    ports:
+        - "5001:5001"     
+         
+    environment:
+        ASPNETCORE_URLS: http://+:5001
+        ASPNETCORE_ENVIRONMENT: development
+        DEFAULT_CONNECTION_STRINGS: "Server=db;Database=authenticationdb;Uid=root;Pwd=123456"
+    
+    volumes:
+    - authenticationdb:/var/lib/mysql 
+
+    networks:
+        - db_net
+
+    restart: unless-stopped
+
+volumes:
+  authenticationdb:
+
+networks:
+  db_net:
+    external: true
+  
+            

@@ -10,6 +10,7 @@ public class AuthDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<UserRole> UserRoles { get; set; }
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -100,6 +101,33 @@ public class AuthDbContext : DbContext
             entity.Property(e => e.DeletedOn)
                 .HasDefaultValue(null);
         });
-               
+
+        modelBuilder.Entity<RefreshToken>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.HasOne(e => e.User)
+                .WithMany(u => u.RefreshTokens)
+                .HasForeignKey(e => e.UserId);
+
+            entity.Property(e => e.Token)
+                .HasMaxLength(500);
+
+            entity.Property(e => e.ExpirationDate)
+                .HasDefaultValue(null);
+
+            entity.Property(e => e.IsRevoked)
+                .IsRequired();
+
+            entity.Property(e => e.ModifiedOn)
+                .HasDefaultValue(null);
+
+            entity.Property(e => e.ModifiedBy)
+                .HasDefaultValue(null);
+
+            entity.Property(e => e.DeletedOn)
+                .HasDefaultValue(null);
+        });
+
     }
 }

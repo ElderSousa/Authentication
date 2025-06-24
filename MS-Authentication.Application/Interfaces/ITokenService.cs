@@ -7,5 +7,5 @@ public interface ITokenService
 {
     string GenerateAccessToken(User user, IEnumerable<Role> roles);
     string GenerateRefreshToken();
-    ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
+    ClaimsPrincipal GetByPrincipalFromExpiredToken(string token);
 }

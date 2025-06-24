@@ -59,7 +59,7 @@ public class TokenService : ITokenService
         return refreshToken;
     }
 
-    public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
+    public ClaimsPrincipal GetByPrincipalFromExpiredToken(string token)
     {
         var secretKey = _configuration["JWT:Key"] ?? throw new InvalidOperationException("Chave secreta invalída!");
 

@@ -10,6 +10,11 @@ public static class InjectDependencyExtensionsService
 {
     public static IServiceCollection InjectService(this IServiceCollection services)
     {
+        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IRefreshTokenService, RefreshTokenService>();
+        services.AddScoped<IRoleService, RoleService>();
+        services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<UserRoleService, UserRoleService>();
         services.AddScoped<IUserService, UserService>();
         services.AddValidatorsFromAssemblyContaining<UserValidation>();
         return services;

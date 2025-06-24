@@ -41,7 +41,7 @@ public class AuthService : BaseService, IAuthService
         if (user is null || !BCrypt.Net.BCrypt.Verify(authRequest.Password, user.PasswordHash))
             throw new KeyNotFoundException("Usuário ou senha inválidos.");
 
-        var roles = await _userRepository.GetRolesAsync(user.Id, cancellationToken);
+        var roles = await _userRepository.GetByRolesAsync(user.Id, cancellationToken);
         var newAccessToken = _tokenService.GenerateAccessToken(user, roles);
         var newRefreshToken = await _refreshTokenService.CreateAsync(user, cancellationToken);
 
@@ -64,7 +64,7 @@ public class AuthService : BaseService, IAuthService
         if (user is null)
             throw new KeyNotFoundException("Usuário ou senha inválidos.");
 
-        var roles = await _userRepository.GetRolesAsync(user.Id, cancellationToken);
+        var roles = await _userRepository.GetByRolesAsync(user.Id, cancellationToken);
         var newAccessToken = _tokenService.GenerateAccessToken(user, roles);
         var newRefreshToken = await _refreshTokenService.CreateAsync(user, cancellationToken);
 

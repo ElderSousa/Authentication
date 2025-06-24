@@ -48,11 +48,11 @@ public class UserRoleService : BaseService, IUserRoleService
         }
     }
 
-    public async Task<Pagination<UserRoleResponse>> GetAllAsync(int page, int pageSize, CancellationToken cancellationToken)
+    public async Task<Pagination<UserRoleResponse>> GetByAllAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
         try
         {
-            var allUserRoles = UserRoleMappingExtension.MapToUseRoleResponse( await _userRoleRepository.GetAllAsync(cancellationToken));
+            var allUserRoles = UserRoleMappingExtension.MapToUseRoleResponse( await _userRoleRepository.GetByAllAsync(cancellationToken));
 
             var pagination = Page(allUserRoles, page, pageSize);
             if (pagination == null)
@@ -67,11 +67,11 @@ public class UserRoleService : BaseService, IUserRoleService
         }
     }
 
-    public async Task<UserRoleResponse> GetIdAsync(Guid userId, Guid roleId, CancellationToken cancellationToken)
+    public async Task<UserRoleResponse> GetByIdAsync(Guid userId, Guid roleId, CancellationToken cancellationToken)
     {
         try
         {
-            var userRole = await _userRoleRepository.GetIdAsync(userId, roleId, cancellationToken);
+            var userRole = await _userRoleRepository.GetByIdAsync(userId, roleId, cancellationToken);
             if (userRole == null)
                 throw new KeyNotFoundException($"UserRole com UserId: {userId} e RoleId: {roleId} não encontrado");
 
@@ -111,7 +111,7 @@ public class UserRoleService : BaseService, IUserRoleService
     {
         try
         {
-            var userRole = await _userRoleRepository.GetIdAsync(userId, roleId, cancellationToken);
+            var userRole = await _userRoleRepository.GetByIdAsync(userId, roleId, cancellationToken);
             if (userRole == null)
                 throw new KeyNotFoundException($"UserRole com UserId: {userId} e RoleId: {roleId} não encontrado");
 

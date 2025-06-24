@@ -14,7 +14,7 @@ public class UserRepository : BaseRepository<User>, IUserRepository
         return await GenericAddAsync(user, cancellationToken);
     }
 
-    public async Task<IEnumerable<User>> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<IEnumerable<User>> GetByAllAsync(CancellationToken cancellationToken)
     {
         return await authDbContext.Users
             .AsNoTracking()
@@ -36,7 +36,7 @@ public class UserRepository : BaseRepository<User>, IUserRepository
             .FirstOrDefaultAsync(u => u.Email == email && u.DeletedOn == null);
     }
 
-    public async Task<IEnumerable<Role>> GetRolesAsync(Guid userId, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Role>> GetByRolesAsync(Guid userId, CancellationToken cancellationToken)
     {
         return await authDbContext.UserRoles
             .AsNoTracking()

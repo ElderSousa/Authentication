@@ -48,7 +48,7 @@ public class UserController : ControllerBase
     [HttpGet("{page}/{pageSize}")]
     [ProducesResponseType(typeof(Pagination<UserResponse>), 200)]
     [ProducesResponseType(204)]
-    public async Task<IActionResult> GetAllAsync(int page, int pageSize, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetByAllAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
         var allUsers = await _userService.GetByAllAsync(page, pageSize, cancellationToken);
         return !allUsers.Itens.Any() ? NoContent() : Ok(allUsers);
@@ -63,7 +63,7 @@ public class UserController : ControllerBase
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(UserResponse), 200)]
     [ProducesResponseType(404)]
-    public async Task<IActionResult> GetIdAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         try
         {
@@ -85,7 +85,7 @@ public class UserController : ControllerBase
     [HttpGet("email/{email}")]
     [ProducesResponseType(typeof(UserResponse), 200)]
     [ProducesResponseType(404)]
-    public async Task<IActionResult> GetByEmaildAsync(string email, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetByEmailAsync(string email, CancellationToken cancellationToken)
     {
         try
         {

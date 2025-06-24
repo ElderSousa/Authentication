@@ -46,9 +46,9 @@ public class RoleController : ControllerBase
     [HttpGet]
     [ProducesResponseType(typeof(Pagination<UserResponse>), 200)]
     [ProducesResponseType(204)]
-    public async Task<IActionResult> GetAllAsync(int page, int pageSize, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetByAllAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
-        var allRoles = await _roleService.GetAllAsync(page, pageSize, cancellationToken);
+        var allRoles = await _roleService.GetByAllAsync(page, pageSize, cancellationToken);
         return !allRoles.Itens.Any() ? NoContent() : Ok(allRoles);
     }
 
@@ -61,11 +61,11 @@ public class RoleController : ControllerBase
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(UserResponse), 200)]
     [ProducesResponseType(404)]
-    public async Task<IActionResult> GetIdAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         try
         {
-            var role = await _roleService.GetIdAsync(id, cancellationToken);
+            var role = await _roleService.GetByIdAsync(id, cancellationToken);
             return Ok(role);
         }
         catch (KeyNotFoundException ex)

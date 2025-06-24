@@ -56,7 +56,7 @@ public class UserService : BaseService, IUserService
     {
         try
         {
-            var allUsers = UserMappingExtension.MapToUserResponse(await _userRepository.GetAllAsync(cancellationToken));
+            var allUsers = UserMappingExtension.MapToUserResponse(await _userRepository.GetByAllAsync(cancellationToken));
 
             var pagination = Page(allUsers, page, pageSize);
             if (pagination == null)
@@ -109,7 +109,7 @@ public class UserService : BaseService, IUserService
     {
         try
         {
-            var allRoles = RoleMappingExtension.MapToRoleResponse(await _userRepository.GetRolesAsync(userId, cancellationToken));
+            var allRoles = RoleMappingExtension.MapToRoleResponse(await _userRepository.GetByRolesAsync(userId, cancellationToken));
 
             var pagination = Page(allRoles, page, pageSize);
             if (pagination == null)

@@ -7,8 +7,8 @@ namespace MS_Authentication.Application.Interfaces;
 public interface IUserRoleService
 {
     Task<Response> CreateAsync(CreateUserRoleRequest userRoleRequest, CancellationToken cancellationToken);
-    Task<UserRoleResponse> GetIdAsync(Guid userId, Guid roleId, CancellationToken cancellationToken);
-    Task<Pagination<UserRoleResponse>> GetAllAsync(int page, int pageSize, CancellationToken cancellationToken);
+    Task<UserRoleResponse> GetByIdAsync(Guid userId, Guid roleId, CancellationToken cancellationToken);
+    Task<Pagination<UserRoleResponse>> GetByAllAsync(int page, int pageSize, CancellationToken cancellationToken);
     Task<Response> UpdateAsync(UpdateUserRoleRequest userRoleRequest, CancellationToken cancellationToken);
     Task<Response> SoftDeleteAsync(Guid userId, Guid roleId, CancellationToken cancellationToken);
 }

@@ -48,11 +48,11 @@ public class RoleService : BaseService, IRoleService
         }
     }
 
-    public async Task<Pagination<RoleResponse>> GetAllAsync(int page, int pageSize, CancellationToken cancellationToken)
+    public async Task<Pagination<RoleResponse>> GetByAllAsync(int page, int pageSize, CancellationToken cancellationToken)
     {
         try
         {
-            var allRoles = RoleMappingExtension.MapToRoleResponse(await _roleRepositoy.GetAllAsync(cancellationToken));
+            var allRoles = RoleMappingExtension.MapToRoleResponse(await _roleRepositoy.GetByAllAsync(cancellationToken));
             var pagination = Page(allRoles, page, pageSize);
 
             if (pagination == null)
@@ -67,11 +67,11 @@ public class RoleService : BaseService, IRoleService
         }
     }
 
-    public async Task<RoleResponse?> GetIdAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<RoleResponse?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         try
         {
-            var role = await _roleRepositoy.GetIdAsync(id, cancellationToken);
+            var role = await _roleRepositoy.GetByIdAsync(id, cancellationToken);
             if (role == null)
                 throw new KeyNotFoundException($"Role com Id: {id} não encontrado");
 
@@ -109,7 +109,7 @@ public class RoleService : BaseService, IRoleService
     {
         try
         {
-            var role = await _roleRepositoy.GetIdAsync(id, cancellationToken);
+            var role = await _roleRepositoy.GetByIdAsync(id, cancellationToken);
             if (role == null)
                 throw new KeyNotFoundException($"Role com Id: {id} não encontrado.");
 

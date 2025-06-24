@@ -1,4 +1,4 @@
-﻿using Asp.Versioning;
+﻿                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using MS_Authentication.Application.Interfaces;
 using MS_Authentication.Application.PaginationModel;
@@ -45,9 +45,9 @@ namespace MS_Authentication.API.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(Pagination<UserResponse>), 200)]
         [ProducesResponseType(204)]
-        public async Task<IActionResult> GetAllAsync(int page, int pageSize, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetByAllAsync(int page, int pageSize, CancellationToken cancellationToken)
         {
-            var allUserRoles = await _userRoleService.GetAllAsync(page, pageSize, cancellationToken);
+            var allUserRoles = await _userRoleService.GetByAllAsync(page, pageSize, cancellationToken);
             return !allUserRoles.Itens.Any() ? NoContent() : Ok(allUserRoles);
         }
 
@@ -61,11 +61,11 @@ namespace MS_Authentication.API.Controllers
         [HttpGet("{userId}/{roleId}")]
         [ProducesResponseType(typeof(UserResponse), 200)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> GetIdAsync(Guid userId, Guid roleId, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetByIdAsync(Guid userId, Guid roleId, CancellationToken cancellationToken)
         {
             try
             {
-                var userRole = await _userRoleService.GetIdAsync(userId, roleId, cancellationToken);
+                var userRole = await _userRoleService.GetByIdAsync(userId, roleId, cancellationToken);
                 return Ok(userRole);
             }
             catch (KeyNotFoundException ex)
